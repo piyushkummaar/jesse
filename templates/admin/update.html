@@ -1,0 +1,95 @@
+{% extends 'admin/base.html'%}
+{% block content %}
+    <h1 class="text-center"><strong>Update User</strong> </h1>
+    <a href="/userdata/{{obj.id}}"  rel="noopener noreferrer"><p class="text-center">Later...</p></a>
+    <div class="card mx-auto" style="width: 40rem;">
+        <div class="card-body shadow">
+    <form method="post" enctype = "multipart/form-data">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" name="name" required="1" value="{{obj.name}}">
+        </div>
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control" name="username" required="1" value="{{obj.username}}">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" name="password" id="exampleInputPassword1" value={{obj.password_hash}} readonly>
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" class="form-control" name="email" required="1" value="{{obj.email}}">
+        </div>
+        <div class="form-group">
+            <label>Bio</label>
+            <textarea  type="text" class="form-control" name="bio" required="1" placeholder="{{obj.bio}}"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlFile1">Profile Image</label>
+            <input type="file" class="form-control-file" name="file" id="exampleFormControlFile1" placeholder="{{obj.profile_photo}}">
+        </div>
+        <div class="form-group">
+            <label>Skills</label>
+            <textarea type="text" class="form-control" name="skills" required="1" placeholder="{{obj.skills}}"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Location</label>
+            <input type="text" class="form-control" name="location" required="1" value="{{obj.location}}">
+        </div>
+        
+        <div class="form-group">
+            <label>Occupation</label>
+            <input type="text" class="form-control" name="occupation" required="1" value="{{obj.occupation}}">
+        </div>
+        
+        <div class="form-group">
+            <label>Organization</label>
+            <input type="text" class="form-control" name="organization" required="1" value="{{obj.organization}}">
+        </div>
+        
+        <div class="form-group">
+            <label>Interests</label>
+            <input type="text" class="form-control" name="interests" required="1" value="{{obj.interests}}">
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="{{obj.is_admin}}" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        Is Admin
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="">
+                    <label class="form-check-label" for="defaultCheck1">
+                        Email verified
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="{{obj.terms_and_conditions_checked}}">
+                        <label class="form-check-label" for="defaultCheck1">
+                Terms & Conditions Checked
+            </label>
+        </div>
+            
+        <button type="submit" class="btn btn-success">Update {{obj.name}} </button>
+        <!-- registration_date = db.Column(db.Float) -->
+        <!-- terms_and_conditions_checked = db.Column(db.Boolean) -->
+        <!-- # email verification
+        {{obj.email_verification_date}}  -->
+        
+        <!-- # other info
+        current_mentorship_role = db.Column(db.Integer)
+        membership_status = db.Column(db.Integer)
+        need_mentoring = db.Column(db.Boolean)
+        available_to_mentor = db.Column(db.Boolean) -->
+    </form>
+    </div>
+    </div>
+
+{% endblock %}
