@@ -20,7 +20,7 @@ obj = UserDAO()
 
 PROJECT_HOME = os.path.dirname(os.path.realpath(__file__))
 UPLOAD_FOLDER = '{}/static/uploads/'.format(PROJECT_HOME)
-UPLOADED_IMAGES_URL = 'http://localhost:5000/static/uploads/'
+UPLOADED_IMAGES_URL = 'http://209.97.155.113:5000/static/uploads/'
 
 def create_new_folder(local_dir):
     newpath = local_dir
@@ -81,9 +81,11 @@ def dboard(app):
     @app.route('/create', methods=['GET', 'POST'])
     def create():
         if request.method == 'POST':
-            name = request.form['name']
-            email = request.form['email']
-            my_data = UserModel(name, email)
+            print(request.form)
+            select = request.form.get('terms_and_conditions')
+            # name = request.form['name']
+            # email = request.form['email']
+            # my_data = UserModel(name, email)
             # db.session.add(my_data)
             # db.session.commit()
             flash("User Inserted Successfully")
@@ -97,41 +99,51 @@ def dboard(app):
             f = request.files['file']
             # print(f)
             print(request.form)
-            # data = UserModel.query.get(obj.id)
-            # if request.form["name"]:
-            #     data.name = request.form["name"]
-            # if request.form["bio"]:
-            #     data.bio = request.form["bio"]
-            # if request.form["location"]:
-            #     data.location = request.form["location"]
-            # if request.form["occupation"]:
-            #     data.occupation = request.form["occupation"]
-            # if request.form["organization"]:
-            #     data.organization = request.form["organization"]
-            # if request.form["slack_username"]:
-            #     data.slack_username = request.form["slack_username"]  
-            # if request.form["social_media_links"]:
-            #     data.social_media_links = request.form["social_media_links"]  
-            # if request.form["skills"]:
-            #     data.skills = request.form["skills"]     
-            # if request.form["interests"]:
-            #     data.interests = request.form["interests"]
-            # if request.form["resume_url"]:
-            #     data.resume_url = request.form["resume_url"]
-            # if f:
-            #     img_name = secure_filename(f.filename)
-            #     create_new_folder(UPLOAD_FOLDER)
-            #     saved_path = os.path.join('static/uploads/', img_name)
-            #     f.save(saved_path)
-            #     path = UPLOADED_IMAGES_URL+img_name
-            #     data.profile_photo = path
-            # else:
-            #     pass
-            # if request.form["need_mentoring"]:
-            #     data.skills = request.form["need_mentoring"]
-            # if request.form["available_to_mentor"]:
-            #     data.available_to_mentor = request.form["available_to_mentor"]
-            # db.seession.commit(data)
+            data = UserModel.query.get(obj.id)
+            if request.form["name"]:
+                data.name = request.form["name"]
+                db.session.commit()
+            if request.form["bio"]:
+                data.bio = request.form["bio"]
+                db.session.commit()
+            if request.form["location"]:
+                data.location = request.form["location"]
+                db.session.commit()
+            if request.form["occupation"]:
+                data.occupation = request.form["occupation"]
+                db.session.commit()
+            if request.form["organization"]:
+                data.organization = request.form["organization"]
+                db.session.commit()
+            if request.form["slack_username"]:
+                data.slack_username = request.form["slack_username"]
+                db.session.commit()  
+            if request.form["social_media_links"]:
+                data.social_media_links = request.form["social_media_links"]
+                db.session.commit()  
+            if request.form["skills"]:
+                data.skills = request.form["skills"]
+                db.session.commit()     
+            if request.form["interests"]:
+                data.interests = request.form["interests"]
+                db.session.commit()
+            if request.form["resume_url"]:
+                data.resume_url = request.form["resume_url"]
+                db.session.commit()
+            if f:
+                img_name = secure_filename(f.filename)
+                create_new_folder(UPLOAD_FOLDER)
+                saved_path = os.path.join('static/uploads/', img_name)
+                f.save(saved_path)
+                path = UPLOADED_IMAGES_URL+img_name
+                data.profile_photo = path
+                db.session.commit()
+            else:
+                pass
+            if request.form["need_mentoring"]:
+                data.need_mentoring = request.form["need_mentoring"]
+            if request.form["available_to_mentor"]:
+                data.available_to_mentor = request.form["available_to_mentor"]
             flash("User Updated Successfully")
             return redirect(url_for('admin'))
         return render_template('admin/update.html',title='Update User', obj=obj)
