@@ -191,7 +191,7 @@ class UserDAO:
                 user["is_available"] = (
                     user["need_mentoring"] or user["available_to_mentor"]
                 )
-
+            
         return list_of_users, HTTPStatus.OK
 
     @staticmethod

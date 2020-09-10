@@ -4,7 +4,8 @@ from app.database.models.user import UserModel
 from app.database.sqlalchemy_extension import db
 from werkzeug import secure_filename
 import os 
-
+from flask_login import login_required, login_user, logout_user
+ 
 obj = UserDAO()
 
 # def login_required(f):
@@ -29,7 +30,7 @@ def create_new_folder(local_dir):
 
 
 def dboard(app):
-    @app.route('/admin')  
+    @app.route('/admin') 
     def admin():
         obj = UserModel.query.order_by(UserModel.id).all()
         return render_template('admin/dashboard.html',title='Home',obj=obj)
@@ -59,7 +60,7 @@ def dboard(app):
                 print(e)
         return render_template('admin/login.html', title='Login',error = error)
     @app.route("/logout/")
-    # @login_required
+    @login_required
     def logout():
         session.clear()
         flash("You have been logged out!")
@@ -95,41 +96,41 @@ def dboard(app):
             print(obj.id)
             f = request.files['file']
             # print(f)
-            # print(request.form)
-            data = UserModel.query.get(obj.id)
-            if request.form["name"]:
-                data.name = request.form["name"]
-            if request.form["bio"]:
-                data.bio = request.form["bio"]
-            if request.form["location"]:
-                data.location = request.form["location"]
-            if request.form["occupation"]:
-                data.occupation = request.form["occupation"]
-            if request.form["organization"]:
-                data.organization = request.form["organization"]
-            if request.form["slack_username"]:
-                data.slack_username = request.form["slack_username"]  
-            if request.form["social_media_links"]:
-                data.social_media_links = request.form["social_media_links"]  
-            if request.form["skills"]:
-                data.skills = request.form["skills"]     
-            if request.form["interests"]:
-                data.interests = request.form["interests"]
-            if request.form["resume_url"]:
-                data.resume_url = request.form["resume_url"]
-            if f:
-                img_name = secure_filename(f.filename)
-                create_new_folder(UPLOAD_FOLDER)
-                saved_path = os.path.join('static/uploads/', img_name)
-                f.save(saved_path)
-                path = UPLOADED_IMAGES_URL+img_name
-                data.profile_photo = path
-            else:
-                pass
-            if request.form["need_mentoring"]:
-                data.skills = request.form["need_mentoring"]
-            if request.form["available_to_mentor"]:
-                data.available_to_mentor = request.form["available_to_mentor"]
+            print(request.form)
+            # data = UserModel.query.get(obj.id)
+            # if request.form["name"]:
+            #     data.name = request.form["name"]
+            # if request.form["bio"]:
+            #     data.bio = request.form["bio"]
+            # if request.form["location"]:
+            #     data.location = request.form["location"]
+            # if request.form["occupation"]:
+            #     data.occupation = request.form["occupation"]
+            # if request.form["organization"]:
+            #     data.organization = request.form["organization"]
+            # if request.form["slack_username"]:
+            #     data.slack_username = request.form["slack_username"]  
+            # if request.form["social_media_links"]:
+            #     data.social_media_links = request.form["social_media_links"]  
+            # if request.form["skills"]:
+            #     data.skills = request.form["skills"]     
+            # if request.form["interests"]:
+            #     data.interests = request.form["interests"]
+            # if request.form["resume_url"]:
+            #     data.resume_url = request.form["resume_url"]
+            # if f:
+            #     img_name = secure_filename(f.filename)
+            #     create_new_folder(UPLOAD_FOLDER)
+            #     saved_path = os.path.join('static/uploads/', img_name)
+            #     f.save(saved_path)
+            #     path = UPLOADED_IMAGES_URL+img_name
+            #     data.profile_photo = path
+            # else:
+            #     pass
+            # if request.form["need_mentoring"]:
+            #     data.skills = request.form["need_mentoring"]
+            # if request.form["available_to_mentor"]:
+            #     data.available_to_mentor = request.form["available_to_mentor"]
             # db.seession.commit(data)
             flash("User Updated Successfully")
             return redirect(url_for('admin'))
