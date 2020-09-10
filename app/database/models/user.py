@@ -106,6 +106,7 @@ class UserModel(db.Model):
             "interests": self.interests,
             "resume_url": self.resume_url,
             "photo_url": self.photo_url,
+            "profile_photo": self.profile_photo,
             "need_mentoring": self.need_mentoring,
             "available_to_mentor": self.available_to_mentor,
         }

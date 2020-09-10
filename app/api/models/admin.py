@@ -34,5 +34,6 @@ public_admin_user_api_model = Model(
         "occupation": fields.String(required=True, description="User occupation"),
         "organization": fields.String(required=True, description="User organization"),
         "skills": fields.String(required=True, description="User skills"),
+        "profile_photo": fields.String(required=False, description="User profile photo"),
     },
 )

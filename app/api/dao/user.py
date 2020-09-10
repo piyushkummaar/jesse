@@ -177,7 +177,7 @@ class UserDAO:
                 users_list,
             )
         ]
-
+        
         for user in list_of_users:
             relation = MentorshipRelationDAO.list_current_mentorship_relation(
                 user["id"]

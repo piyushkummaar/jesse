@@ -122,6 +122,7 @@ user_dashboard_user_details = Model(
         "photo_url": fields.String(
             required=True, description="Mentorship relation user profile picture URL"
         ),
+        "profile_photo": fields.String(required=False, description="User profile photo"),
     },
 )
 

@@ -53,6 +53,7 @@ public_user_api_model = Model(
         "need_mentoring": fields.Boolean(
             required=True, description="User need to be mentored indication"
         ),
+        "profile_photo": fields.String(required=False, description="User profile photo"),
         "available_to_mentor": fields.Boolean(
             required=True, description="User availability to mentor indication"
         ),

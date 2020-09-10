@@ -240,7 +240,7 @@ class VerifiedUser(Resource):
         doesn't take any other input. A JSON array having an object for each user is
         returned. The array contains id, username, name, slack_username, bio,
         location, occupation, organization, interests, skills, need_mentoring,
-        available_to_mentor. The current user's details are not returned.
+        available_to_mentor,profile_photo. The current user's details are not returned.
         """
         user_id = get_jwt_identity()
         return DAO.list_users(user_id, request.args.get("search", ""), is_verified=True)
