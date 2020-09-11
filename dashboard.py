@@ -4,7 +4,6 @@ from app.database.models.user import UserModel
 from app.database.sqlalchemy_extension import db
 from werkzeug import secure_filename
 import os 
-from flask_login import login_required, login_user, logout_user
  
 obj = UserDAO()
 
@@ -60,7 +59,7 @@ def dboard(app):
                 print(e)
         return render_template('admin/login.html', title='Login',error = error)
     @app.route("/logout/")
-    @login_required
+    # @login_required
     def logout():
         session.clear()
         flash("You have been logged out!")
